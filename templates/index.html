@@ -1,0 +1,38 @@
+{%extends "base.html"%} {%block title%}Ingresar{%endblock%} 
+{%block css%}
+	<link rel="stylesheet" href="{{ url_for("static", filename="css/inicio.css") }}">
+{%endblock%}
+{%block content %}
+
+<div class="login">
+	<h1 class="Title">Iniciar Sesión</h1>
+
+	<form method="post" action="{{url_for("inicio")}} ">
+		<input
+			type="number"
+			name="dni"
+			placeholder="DNI"
+			required
+			pattern="[0-9]{8}"
+			title="Ingresa DNI sin puntos"
+			class="singin"
+		/>	
+		{% if dnierror %}
+    		<label for="error" class="error">{{dnierror}}</label>
+		{% endif %}
+		<input
+			type="password"
+			name="pass"
+			placeholder="Contraseña"
+			required
+			class="singin"
+		/>
+		{% if paserror %}
+    		<label for="error" class="error">{{paserror}}</label>
+		{% endif %}
+		<input type="submit" value="Ingresar" class="ingresarbtn" id="bntsubmit"/>
+</div>
+	
+</form>
+
+{%endblock%}

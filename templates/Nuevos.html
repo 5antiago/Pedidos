@@ -1,0 +1,27 @@
+{%extends "base.html"%} {%block title%}Nuevo Pedido{%endblock%} {%block css%} <link
+rel="stylesheet" href="{{ url_for("static", filename="css/appstyle.css") }}">
+{%endblock%} {%block content %}
+<div class="Title">
+    <h1>Registrar Pedido</h1>
+    {%if message%}
+        <h2>{{message}}</h2>
+    {%endif%}
+</div>
+<div class="container">
+    <form action="/Mozo/{{usuario}}/Pedido/s" method="POST">
+        <div class="Pedido Nuevo">
+            <h4>Pedido Nuevo</h4>
+            <span>Ingrese mesa: </span>
+            <input type="number" name="Mesa" id="Textinput" placeholder="Mesa">
+            <span>Seleccione los productos: </span>
+            {%for prod in productos%}
+                <span><input type="checkbox" name="{{prod.Nombre}}">{{prod.Nombre}} ${{prod.PrecioUnitario}}</span>
+            {%endfor%}  
+            <span>Observaciones: </span>
+            <input type="text" name="observaciones" id="Textinput" placeholder="Observaciones">
+            <input type="submit" value="Confirmar" class="Button">
+        </div>
+    </form> 
+</div>
+
+{%endblock%}

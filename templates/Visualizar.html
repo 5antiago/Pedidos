@@ -1,0 +1,40 @@
+{%extends "base.html"%}
+{%block title%}Pedidos{%endblock%}
+{%block css%}<link rel="stylesheet" href="{{ url_for("static", filename="css/appstyle.css") }}">{%endblock%}
+
+{%block content%}
+    <div class="Title">
+        <h1>Pedidos no cobrados</h1> 
+        {%if cobro%}
+            <h2>{{cobro}}</h2>
+        {%endif%}
+    </div>
+    {%if pedidos%}
+        <div class="container">
+        {%for pedido in pedidos%}
+            <div class="Pedidos">
+                <h4>Pedido {{pedido.NumPedido}}</h4>
+                <ul>
+                    <li>Mesa: {{pedido.Mesa}}</li>
+                    <li>Mozo: {{pedido.DNIMozo}}</li>
+                    <li>Items: 
+                        <div class="Items">
+                            <ul>
+                                {%for item in pedido.Items.all()%}
+                                    <li>{{item.Producto.Nombre}}</li>
+                                {%endfor%}
+                            </ul>
+                        </div>
+                    </li>
+                    <li>Total: ${{pedido.Total}}</li>
+                </ul>
+                <form action="/Mozo/{{usuario}}/Visualizar/{{pedido.NumPedido}}" method="POST">
+                    <input type="submit" value="Cobrar", class="Button">
+                </form>
+            </div>
+        {%endfor%}
+        </div>
+    {%else%}
+    <h3>No hay más pedidos</h3>
+    {%endif%}
+{%endblock%}

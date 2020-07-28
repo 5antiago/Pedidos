@@ -1,0 +1,23 @@
+{%extends "base.html"%} {%block title%}Mozo{%endblock%} {%block css%} <link
+rel="stylesheet" href="{{ url_for("static", filename="css/appstyle.css") }}">
+{%endblock%} {%block content %}
+
+<header>
+	<div class="Title">
+		<h1>Bienvenido</h1>
+		<h2>Iniciaste sesión como {{usuario}}</h2>
+	</div>
+</header>
+<div class="container">
+	<form class="options" method="post" action="/Mozo/{{usuario}}/Pedido/q">
+        <label class="optiontext">Registrar<br>Nuevo<br>Pedido</label>
+		<input type="submit" value="Crear Pedido" class="Button"/>
+    </form>
+    <form class="options" method="post" action="/Mozo/{{usuario}}/Visualizar/q">
+        <label class="optiontext">Visualizar<br>Lista de<br>Pedidos</label>
+		<input type="submit" value="Ver Pedidos" class="Button"/>
+    </form>
+</div>
+
+</div>
+{%endblock%}

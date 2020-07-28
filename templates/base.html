@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="es">
+	<head>
+		<link
+			href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap"
+			rel="stylesheet"
+		/>
+		{%block css%}{%endblock%}
+
+		<meta charset="UTF-8" />
+		<title>{%block title%}{%endblock%}</title>
+	</head>
+	<body>
+		{% with message = get_flashed_messages() %} {% if message %}
+		<ul class="flashes">
+			<li>{{message}}</li>
+		</ul>
+		{% endif %} {% endwith %} {%block content%} {%endblock%}
+	</body>
+</html>

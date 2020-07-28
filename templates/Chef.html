@@ -1,0 +1,39 @@
+{%extends "base.html"%}
+{%block title%}Pedidos{%endblock%}
+{%block css%}<link rel="stylesheet" href="{{ url_for("static", filename="css/appstyle.css") }}">{%endblock%}
+
+{%block content%}
+    <div class="Title">
+        <h1>Pedidos no Listos</h1> 
+        {%if guardado%}
+            <h2>{{guardado}}</h2>
+        {%endif%}
+    </div>
+    {%if pedidos%}
+        <div class="container">
+        {%for pedido in pedidos%}
+                <div class="Pedidos">
+                    <h4>Pedido {{pedido.NumPedido}}</h4>
+                    {%if pedido.Observacion%}
+                    <h4>{{pedido.Observacion}}</h4>
+                    {%endif%}
+                    <form action="{{url_for("Chef", dniuser=usuario )}}" method="POST">
+                        <span>Items:</span>
+                            <div class="Items">
+                                    {%for item in pedido.Items.all()%}
+                                        {%if item.Estado == "Listo"%}
+                                        <span><input type="checkbox" name="{{item.NumItem}}" checked>{{item.Producto.Nombre}}</span>
+                                        {%else%}
+                                            <span><input type="checkbox" name="{{item.NumItem}}">{{item.Producto.Nombre}}</span>
+                                        {%endif%}
+                                    {%endfor%}    
+                            </div>
+                        <input type="submit" value="Guardar" class="Button">
+                    </form>
+                </div>   
+        {%endfor%}
+        </div>
+    {%else%}
+    <h3>No hay más pedidos</h3>
+    {%endif%}
+{%endblock%}
