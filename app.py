@@ -41,7 +41,7 @@ def Visualizar(dniuser, ped):
     if True: #acceso(request.url_root, request.referrer):
         if ped !="q":
             pedido=Pedidos.query.filter_by(NumPedido=ped).first()
-            pedido.Cobrado=False
+            pedido.Cobrado=True
             db.session.commit()
             estado="Pedido {} Cobrado exitosamente".format(ped)
             pedidos = Pedidos.query.filter_by(Cobrado=False).all()
@@ -101,7 +101,7 @@ def NuevoPedido(dniuser, new):
             item.NumPedido=numpedido
             db.session.add(item)
         db.session.commit()
-        return render_template("Nuevos.html", usuario=dniuser, productos=Pedidos.query.all(), message="Pedido añadido")
+        return render_template("Nuevos.html", usuario=dniuser, productos=Productos.query.all(), message="Pedido añadido")
 if __name__ == "__main__":
     db.create_all()
     app.run(debug=True)
